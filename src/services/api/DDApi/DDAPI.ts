@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { MonstersParamsType } from "types/api/DD";
 import getFetchBaseQueryContent from "utils/api/getFetchBaseQueryContent";
 
 export const DDApi = createApi({
@@ -7,17 +8,20 @@ export const DDApi = createApi({
   tagTypes: ["DDApi"],
   keepUnusedDataFor: 3600,
   endpoints: (build) => ({
-    getMonsters: build.query<any, any>({
-      query: () => ({
+    getMonsters: build.query<any, MonstersParamsType>({
+      query: (params: MonstersParamsType) => ({
         url: "/monsters",
-        params: {
-          limit: 100,
-        },
+        method: "GET",
+        params,
+      }),
+    }),
+    getMonster: build.query<any, string>({
+      query: (slug: string) => ({
+        url: `/monsters/${slug}`,
         method: "GET",
       }),
     }),
-    // ... give me more endpoints !
   }),
 });
 
-export const { useGetMonstersQuery } = DDApi;
+export const { useGetMonstersQuery, useGetMonsterQuery } = DDApi;

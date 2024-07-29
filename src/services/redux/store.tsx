@@ -1,16 +1,10 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { DDApi } from "../api/DDApi/DDAPI";
 
-const DDReducers = combineReducers({
-    [DDApi.reducerPath]: DDApi.reducer,
-    // [DDApi.races.reducerPath]: DDApi.races.reducer,
-    // [DDApi.characters.reducerPath]: DDApi.characters.reducer,
-})
-
 const store = configureStore({
     reducer: {
-        DDSlice: DDReducers
+        [DDApi.reducerPath]: DDApi.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
         DDApi.middleware

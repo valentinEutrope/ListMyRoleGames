@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 
 const getSrcAliases = (srcFolders: string[]): { [key: string]: string } =>
   srcFolders.reduce((acc, srcFolder) => {
-    const aliasPath = "./src" + srcFolder;
+    const aliasPath = "./src/" + srcFolder;
 
     return {
       ...acc,

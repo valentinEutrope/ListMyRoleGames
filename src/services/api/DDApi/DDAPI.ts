@@ -3,7 +3,7 @@ import { MonstersParamsType } from "types/api/DD";
 import getFetchBaseQueryContent from "utils/api/getFetchBaseQueryContent";
 
 export const DDApi = createApi({
-  baseQuery: fetchBaseQuery(getFetchBaseQueryContent("https://api.open5e.com")),
+  baseQuery: fetchBaseQuery(getFetchBaseQueryContent("https://api.open5e.com/v1")),
   reducerPath: "DDApi",
   tagTypes: ["DDApi"],
   keepUnusedDataFor: 3600,
@@ -14,14 +14,21 @@ export const DDApi = createApi({
         method: "GET",
         params,
       }),
-    }),
+    }),    
     getMonster: build.query<any, string>({
       query: (slug: string) => ({
         url: `/monsters/${slug}`,
         method: "GET",
       }),
     }),
+    getSpells: build.query<any, MonstersParamsType>({
+      query: (params: MonstersParamsType) => ({
+        url: "/spells",
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { useGetMonstersQuery, useGetMonsterQuery } = DDApi;
+export const { useGetMonstersQuery, useGetMonsterQuery, useGetSpellsQuery, useLazyGetMonstersQuery, useLazyGetSpellsQuery } = DDApi;
